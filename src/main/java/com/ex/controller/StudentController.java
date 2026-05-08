@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ex.model.Student;
 import com.ex.service.StudentService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -40,12 +42,12 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public Student createStudent(@RequestBody Student student) {
+    public Student createStudent(@Valid @RequestBody Student student) {
         return studentService.createStudent(student);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @Valid @RequestBody Student student) {
         Student updatedStudent = studentService.updateStudent(id, student);
         if (updatedStudent != null) {
             return ResponseEntity.ok(updatedStudent);
