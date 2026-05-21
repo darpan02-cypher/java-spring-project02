@@ -10,9 +10,17 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity                                                     //you specify entity in model class
 @Table(name = "students")                                   //you specify the table name in database where you want to store the data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
     @Id                                                      //Primary key where you specify @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)      //this means it will autogenerate the id value
@@ -27,38 +35,5 @@ public class Student {
     
     @OneToOne(cascade = CascadeType.ALL)
     private StudentDetails studentDetails; //one to one relationship with student details
-
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public StudentDetails getStudentDetails() {
-        return studentDetails;
-    }
-
-    public void setStudentDetails(StudentDetails studentDetails) {
-        this.studentDetails = studentDetails;
-    }
 
 }

@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ex.model.Student;
 import com.ex.service.StudentService;
 
 import jakarta.validation.Valid;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 @RestController
 @RequestMapping("/api/students")
 public class StudentController {
@@ -31,9 +34,16 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
+    @GetMapping("/paginated")
+    public List<Student> getStudentsPaginated(@RequestParam(defaultValue = "0") int page) {
+        // Hardcoded 3 records per page as requested
+        return studentService.getStudentsPaginated(page, 3);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
         Student student = studentService.getStudentById(id);
+        log.info("GET /api/students/{} - Student found: {}",student);
         if (student != null) {
             return ResponseEntity.ok(student);
         } else {

@@ -1,8 +1,10 @@
 //interface for service layer
 package com.ex.service;
-import org.springframework.stereotype.Service;
-import com.ex.model.Student;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ex.model.Student;
 
 @Service
 public interface StudentService {
@@ -11,4 +13,5 @@ public interface StudentService {
     Student createStudent(Student student);
     Student updateStudent(Long id, Student student);
     void deleteStudent(Long id);
+    List<Student> getStudentsPaginated(int page, int size);
 }   

@@ -3,12 +3,16 @@ package com.ex;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import lombok.extern.log4j.Log4j2;
+
 @SpringBootApplication
+@Log4j2
 public class StudentApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StudentApplication.class, args);
-		System.out.println("Hello World");
+		//System.out.println("Hello World");
+		log.info("Student Application started successfully.");
 	}
 
 }
